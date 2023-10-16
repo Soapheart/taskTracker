@@ -6,7 +6,7 @@ const dataService = () => {
     const getDataFromLocalStorage = ()=> {
         let data = JSON.parse(localStorage.getItem(localDataStorage));
         if (!data){
-            return data = [{}]
+            return data
         } else {
             return{
                 data

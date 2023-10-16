@@ -6,7 +6,7 @@ import './app.css';
 import AddTask from "../add-task/add-task";
 import TaskList from "../task-list/task-list";
 import dataService from "../../services/dataService";
-import Pomodoro from "../pomodoro/Pomodoro";
+// import Pomodoro from "../pomodoro/Pomodoro";
 
 
 const App = () => {
@@ -17,10 +17,8 @@ const App = () => {
 
     useEffect(()=>{
         let data = getDataFromLocalStorage();
-        console.log(data.data);
-        data.data.length > 0 ? setTasks(tasks = data.data) : setTasks(tasks = [])
-
-        // console.log(data.data);
+        console.log(data);
+        data ? setTasks(tasks = data.data) : setTasks(tasks = [])
     },[])
 
     const addTask = (title, desc, dateTime) => {
@@ -50,7 +48,7 @@ const App = () => {
 
     return(
         <div className="app">
-            <Pomodoro/>
+            {/* <Pomodoro/> */}
             <AddTask onAddTask={addTask}/>
             <TaskList 
             onDeleteTask={(id) => deleteTask(id)} 
