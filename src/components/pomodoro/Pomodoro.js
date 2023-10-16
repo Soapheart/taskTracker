@@ -7,37 +7,72 @@ export default function Pomodoro() {
     const [seconds, setSeconds] = useState (0);
     const [totalSeconds, setTotalSeconds] = useState(0);
     const [displayMessage, setDisplayMessage] = useState(false);
-    const [playState, setPlayState] = useState(false);
+    // const [playState, setPlayState] = useState(true);
+    const [intervalId, setIntervalId] = useState(null);
 
 
     const renders = useRef(0);
+
+    const playState = intervalId != null;
+    const startStopBtnHandler = () => {
+        // setPlayState(!playState);
+        if(playState){
+
+        }else{
+            let interval = setInterval(()=>{
+                // clearInterval(interval);
+                console.log('tiktak!');
+            }, 1000)
+            setIntervalId(interval)
+        }
+        // let interval = setInterval(() => {
+        //         clearInterval(interval);
+        //             if (seconds === 0){
+        //                 if(minutes !== 0){
+        //                     setSeconds(59);
+        //                     setMinutes(minutes-1);
+        //                 }else{
+        //                     let minutes = displayMessage ? 24 : 4;
+        //                     let seconds = 59;
+        
+        //                     setSeconds(seconds);
+        //                     setMinutes(minutes);
+        //                     setDisplayMessage(!displayMessage);
+        //                 }
+        //             }else{
+        //                 setSeconds(seconds - 1);
+        //             }
+        //             setTotalSeconds(totalSeconds + 1);
+        //             renders.current++;
+        //         }, 1000);
+    }
     // const intervalRef = useRef();
 
 
-    useEffect(()=>{
-      if(playState){
-        let interval = setInterval(() => {
-            clearInterval(interval);
-            if (seconds === 0){
-                if(minutes !== 0){
-                    setSeconds(59);
-                    setMinutes(minutes-1);
-                }else{
-                    let minutes = displayMessage ? 24 : 4;
-                    let seconds = 59;
+    // useEffect(()=>{
+    //   if(playState){
+    //     let interval = setInterval(() => {
+    //         clearInterval(interval);
+    //         if (seconds === 0){
+    //             if(minutes !== 0){
+    //                 setSeconds(59);
+    //                 setMinutes(minutes-1);
+    //             }else{
+    //                 let minutes = displayMessage ? 24 : 4;
+    //                 let seconds = 59;
 
-                    setSeconds(seconds);
-                    setMinutes(minutes);
-                    setDisplayMessage(!displayMessage);
-                }
-            }else{
-                setSeconds(seconds - 1);
-            }
-            setTotalSeconds(totalSeconds + 1);
-            renders.current++;
-        }, 1000);
-      }
-    },[])
+    //                 setSeconds(seconds);
+    //                 setMinutes(minutes);
+    //                 setDisplayMessage(!displayMessage);
+    //             }
+    //         }else{
+    //             setSeconds(seconds - 1);
+    //         }
+    //         setTotalSeconds(totalSeconds + 1);
+    //         renders.current++;
+    //     }, 1000);
+    //   }
+    // },[])
 
   return (
     <div className="pomodoro">
@@ -49,7 +84,8 @@ export default function Pomodoro() {
             {displayMessage && <div>Break!</div>}
         </div>
         <p>Renders: {renders.current}</p>
-        <button onClick={()=>{setPlayState(!playState)}}>{playState ? "Play" : "Pause"}</button>
+        <button onClick={startStopBtnHandler}>{playState ? "Play" : "Pause"}</button>
+        {/* <button onClick={()=>{setPlayState(!playState)}}>{playState ? "Play" : "Pause"}</button> */}
         <button >resetTimer</button>
     </div>
   );

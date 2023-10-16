@@ -6,7 +6,7 @@ import './app.css';
 import AddTask from "../add-task/add-task";
 import TaskList from "../task-list/task-list";
 import dataService from "../../services/dataService";
-// import Pomodoro from "../pomodoro/Pomodoro";
+import Pomodoro from "../pomodoro/Pomodoro";
 
 
 const App = () => {
@@ -50,6 +50,7 @@ const App = () => {
 
     return(
         <div className="app">
+            <Pomodoro/>
             <AddTask onAddTask={addTask}/>
             <TaskList 
             onDeleteTask={(id) => deleteTask(id)} 
