@@ -1,15 +1,15 @@
 .pomodoro{
   cursor: pointer;
   border-radius: 30px;
-  height: 400px;
-  width: 400px;
-  margin: 0 auto;
+  /* height: 400px;
+  width: 400px; */
+  /* margin: 0 auto; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 60px;
+  padding: 30px;
   color: #fff;
   background-color: darkslategray;
 }

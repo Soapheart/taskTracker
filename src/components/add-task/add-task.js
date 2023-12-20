@@ -4,6 +4,7 @@ const AddTask = (props) => {
 
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
+    const completed = false;
     let dateTime;
 
 
@@ -24,17 +25,19 @@ const AddTask = (props) => {
         e.preventDefault();
         dateTime = new Date();
         console.log(dateTime);
-        props.onAddTask(title, desc, dateTime);
+        props.onAddTask(title, desc, dateTime, completed);
         setDesc('');
         setTitle('');
     }
 
+
+
     return(
         <div>
-            <p>Добавляем новую задачу</p>
+            <p>Adding new task</p>
             <form onSubmit={submitTask}>
-                <input placeholder="Заголовок" onChange={onValueChange} value={title} name="Title" required></input>
-                <input placeholder="Какой-то текст" onChange={onValueChange} value={desc} name="Desc" required></input>
+                <input placeholder="Title" onChange={onValueChange} value={title} name="Title" required></input>
+                <input placeholder="Desc" onChange={onValueChange} value={desc} name="Desc" required></input>
                 <button type="submit">Add task</button>
             </form>
         </div>

@@ -1,4 +1,5 @@
 .taskListItem{
+    position: relative;
     color: #fff;
     list-style: none;
     margin: 15px 0;
@@ -6,12 +7,59 @@
     background-color: rgb(56, 96, 96);
     border-radius: 20px;
 }
-.taskListItem__title{
+.text-content{
+    width: 100%;
+}
+.text-content-data{
+    display: flex;
+}
+.text-content__title{
     font-size: 1.5rem;
     font-weight: bold;
 }
-.taskListItem__time{
+.text-content__desc{
+    
+}
+.taskListItem-meta{
+    display: flex;
+    justify-content: end;
+    gap: 1em;
+}
+.taskListItem-meta__time{
     text-align: end;
     font-size: 0.7rem;
-
 }
+.taskListItem-meta__totalTime{
+    text-align: end;
+    font-size: 0.7rem;
+}
+.taskListItem-data{
+    display: flex;
+    gap: 1em;
+    margin-bottom: 12px;
+    justify-content: space-between;
+}
+.taskListItem-data__checkbox{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.taskListItem-data__checkbox+label::before{
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid #adb5bd;
+    border-radius: 0.25em;
+    margin-right: 0.5em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50% 50%;
+}
+.taskListItem-data__checkbox:checked+label::before {
+    border-color: #0b76ef;
+    background-color: #0b76ef;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+  }

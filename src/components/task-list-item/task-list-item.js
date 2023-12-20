@@ -1,9 +1,15 @@
 import './task-list-item.css';
+import {useState } from "react";
+import Pomodoro from "../pomodoro/Pomodoro";
 
 
-const TaskListItem = ({taskData, onDeleteTask}) => {
-    const {title, desc, dateTime} = taskData;
-    // console.log(new Date(dateTime).getHours());
+
+const TaskListItem = ({taskData, onDeleteTask, onCompleteTask}) => {
+    const {title, desc, dateTime, completed} = taskData;
+    
+    const [checked, setChecked] = useState(completed);
+    const [totalSec, setTotalSec] = useState(0);
+
     const formatDateTime = (dateTime) =>{
         const formatNum = (num) => {
             if(num<10){
@@ -18,18 +24,48 @@ const TaskListItem = ({taskData, onDeleteTask}) => {
         return `${time} ${date}`;
     }
 
+    const checkboxChange = () => {
+        setChecked(!checked);
+        onCompleteTask();
+    }
+
+    const handleTimeChange = (totalTime) => {
+        setTotalSec(totalTime);
+    }
+
+    const formatTime = (totalTime) => {
+        let hours = Math.floor(totalTime / 3600);
+        let minutes = Math.floor(totalTime / 60 ) - (hours * 60);
+        let seconds = totalTime % 60;
+        let formattedTime = hours.toString().padStart(2,'0') + ':' + minutes.toString().padStart(2,'0') + ':' + seconds.toString().padStart(2,'0');
+        return formattedTime;
+    }
+
     return (
         <li className='taskListItem'>
-            <div className='taskListItem__title'>
-                {title}
+            <div className="taskListItem-data">
+                <input className='taskListItem-data__checkbox' name='checkbox' type="checkbox" checked={checked}/>
+                <label htmlFor="checkbox"  onClick={()=>{checkboxChange()}}></label>
+                <div className='text-content'>
+                    <div className='text-content__title'>
+                        {title}
+                    </div>
+                    <div className='text-content__desc'>
+                        {desc}
+                    </div>
+                </div>
+                <Pomodoro onTimerRun={handleTimeChange}/>
+                <button onClick={onDeleteTask}>Delete</button>
             </div>
-            <div className='taskListItem__desc'>
-                {desc}
+            <div className='taskListItem-meta'>
+                <div className='taskListItem-meta__time'>
+                    Сreated: {formatDateTime(dateTime)}
+                </div>
+                <div className="taskListItem-meta__totalTime">
+                    Total time passed: {formatTime(totalSec)}
+                </div>
             </div>
-            <div className='taskListItem__time'>
-                Time created: {formatDateTime(dateTime)}
-            </div>
-            <button onClick={onDeleteTask}>Delete</button>
+            
         </li>
     )
 }

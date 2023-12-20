@@ -6,7 +6,6 @@ import './app.css';
 import AddTask from "../add-task/add-task";
 import TaskList from "../task-list/task-list";
 import dataService from "../../services/dataService";
-// import Pomodoro from "../pomodoro/Pomodoro";
 
 
 const App = () => {
@@ -21,13 +20,15 @@ const App = () => {
         data ? setTasks(tasks = data.data) : setTasks(tasks = [])
     },[])
 
-    const addTask = (title, desc, dateTime) => {
+
+    const addTask = (title, desc, dateTime, completed) => {
         if(title){
             const newTask = {
                 id:`task-${nanoid()}`,
                 title,
                 desc,
-                dateTime
+                dateTime,
+                completed,
             }
             setTasks(
                 tasks = [...tasks, newTask]
@@ -39,21 +40,29 @@ const App = () => {
         }
     }
     const deleteTask = (id) =>{
-        console.log(id);
         setTasks(
             tasks = tasks.filter(item => item.id !== id)
         )
         saveDataToLocalStorage(tasks);
     }
 
+    const completeTask = (id) => {
+        const completedTask = tasks.find(task=>task.id===id);
+        if(completedTask){
+            completedTask.completed = !completedTask.completed;
+        }
+        console.log(tasks);
+        saveDataToLocalStorage(tasks);
+
+    }
+
     return(
         <div className="app">
-            {/* <Pomodoro/> */}
             <AddTask onAddTask={addTask}/>
             <TaskList 
-            onDeleteTask={(id) => deleteTask(id)} 
+            onDeleteTask={(id) => deleteTask(id)}
+            onCompleteTask={(id) => completeTask(id)}
             tasksArr={tasks}/>
-            {/* <Pomodoro /> */}
         </div>
     )
 }
