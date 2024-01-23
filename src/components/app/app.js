@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 
 import './app.css';
 
+import ProjectsList from "../ProjectsList/ProjectsList";
 import AddTask from "../add-task/add-task";
 import TaskList from "../task-list/task-list";
 import dataService from "../../services/dataService";
@@ -51,17 +52,27 @@ const App = () => {
         if(completedTask){
             completedTask.completed = !completedTask.completed;
         }
-        console.log(tasks);
         saveDataToLocalStorage(tasks);
+    }
 
+    const changeTask = (id, data) => {
+        const changedTask = tasks.find(task=>task.id===id);
+        const updatedTask = {
+            ...changedTask,
+            ...data
+        };
+        console.log(data);
+        // saveDataToLocalStorage(tasks);
     }
 
     return(
         <div className="app">
+            <ProjectsList/>
             <AddTask onAddTask={addTask}/>
             <TaskList 
             onDeleteTask={(id) => deleteTask(id)}
             onCompleteTask={(id) => completeTask(id)}
+            onEditTask={(id, data)=>changeTask(id, data)}
             tasksArr={tasks}/>
         </div>
     )

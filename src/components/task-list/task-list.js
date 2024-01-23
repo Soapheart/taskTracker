@@ -2,7 +2,7 @@ import TaskListItem from '../task-list-item/task-list-item';
 import './task-list.css';
 
 const TaskList = (props) => {
-    const {tasksArr, onDeleteTask, onCompleteTask} = props;
+    const {tasksArr, onDeleteTask, onCompleteTask, onEditTask} = props;
     const tasks = tasksArr;
 
     // console.log('Входит в компонент:');
@@ -15,6 +15,7 @@ const TaskList = (props) => {
                 key={element.id}
                 onDeleteTask={()=>onDeleteTask(element.id)}
                 onCompleteTask={()=>onCompleteTask(element.id)}
+                onEditTask={(data)=>onEditTask(element.id, data)}
                 taskData={element}
                 />
             )

@@ -1,11 +1,19 @@
 .taskListItem{
+    outline: 2px solid rgba(0, 0, 0, 0);
+    transition: 0.2s all;
     position: relative;
     color: #fff;
     list-style: none;
     margin: 15px 0;
     padding: 15px;
-    background-color: rgb(56, 96, 96);
+    background-color: #283845;
     border-radius: 20px;
+    -webkit-box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
+}
+.taskListItem_completed{
+    outline: 2px solid green;
 }
 .text-content{
     width: 100%;
@@ -16,6 +24,7 @@
 .text-content__title{
     font-size: 1.5rem;
     font-weight: bold;
+    overflow-wrap: anywhere;
 }
 .text-content__desc{
     
@@ -35,6 +44,7 @@
 }
 .taskListItem-data{
     display: flex;
+    align-items: center;
     gap: 1em;
     margin-bottom: 12px;
     justify-content: space-between;

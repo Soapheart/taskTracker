@@ -103,8 +103,10 @@ export default function Pomodoro( {onTimerRun} ) {
             {displayMessage && <div>Break!</div>}
         </div>
         {/* <p>Time passed: {renders.current}</p> */}
-        <button onClick={startStopBtnHandler}>{playState ? "⏸" : "⏵"}</button>
-        <button onClick={()=>{console.log('Reload')}}>↻</button>
+        <div className='pomodoro__controls'>
+            <button onClick={startStopBtnHandler}>{playState ? "⏸" : "⏵"}</button>
+            <button onClick={()=>{console.log('Reload')}}>↻</button>
+        </div>
     </div>
   );
 }

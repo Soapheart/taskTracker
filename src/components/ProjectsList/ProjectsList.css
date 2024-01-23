@@ -1,0 +1,30 @@
+.projectsList{
+    position: relative;
+    color:#fff;
+    grid-row: 1/3;
+    padding: 30px;
+    display: grid;
+    gap: 10px;
+    align-items: start;
+    grid-template-rows: min-content min-content auto min-content;
+}
+.projectsList::after{
+    right: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    content: '';
+    width: 3px;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    
+}
+.projectsList .projectsList__title{
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+.projectsList .services{
+    display: flex;
+    align-self: end;
+}

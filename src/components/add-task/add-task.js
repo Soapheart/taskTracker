@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './add-task.css';
 
 const AddTask = (props) => {
 
@@ -24,7 +25,6 @@ const AddTask = (props) => {
     const submitTask = (e) => {
         e.preventDefault();
         dateTime = new Date();
-        console.log(dateTime);
         props.onAddTask(title, desc, dateTime, completed);
         setDesc('');
         setTitle('');
@@ -33,8 +33,8 @@ const AddTask = (props) => {
 
 
     return(
-        <div>
-            <p>Adding new task</p>
+        <div className="taskCreate-form">
+            <span>Create task</span>
             <form onSubmit={submitTask}>
                 <input placeholder="Title" onChange={onValueChange} value={title} name="Title" required></input>
                 <input placeholder="Desc" onChange={onValueChange} value={desc} name="Desc" required></input>

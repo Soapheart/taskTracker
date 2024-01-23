@@ -1,4 +1,4 @@
 .taskList{
-    padding: 30px 30px;
-    background-color: darkslategray;
+    grid-column: 2;
+    padding: 0px 30px;
 }

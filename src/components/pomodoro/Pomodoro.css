@@ -1,6 +1,5 @@
 .pomodoro{
-  cursor: pointer;
-  border-radius: 30px;
+  border-radius: 90px;
   /* height: 400px;
   width: 400px; */
   /* margin: 0 auto; */
@@ -10,6 +9,16 @@
   justify-content: center;
   text-align: center;
   padding: 30px;
-  color: #fff;
-  background-color: darkslategray;
+  color: #31302f;
+  background-color: #f2d492;
+}
+.pomodoro .pomodoro__controls{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: baseline;
+}
+.pomodoro .pomodoro__controls button{
+  cursor: pointer;
+  border: 0;
+  background-color: unset;
 }

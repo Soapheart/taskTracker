@@ -1,14 +1,22 @@
 import './task-list-item.css';
-import {useState } from "react";
+import {useState, useEffect} from "react";
 import Pomodoro from "../pomodoro/Pomodoro";
 
 
-
-const TaskListItem = ({taskData, onDeleteTask, onCompleteTask}) => {
+const TaskListItem = ({taskData, onDeleteTask, onCompleteTask, onEditTask}) => {
     const {title, desc, dateTime, completed} = taskData;
     
     const [checked, setChecked] = useState(completed);
     const [totalSec, setTotalSec] = useState(0);
+
+    const [data, setData] = useState({
+        title:'',
+        desc:''
+    });
+
+    useEffect(() => {
+        onEditTask(data);
+      }, [data]);
 
     const formatDateTime = (dateTime) =>{
         const formatNum = (num) => {
@@ -41,16 +49,26 @@ const TaskListItem = ({taskData, onDeleteTask, onCompleteTask}) => {
         return formattedTime;
     }
 
+    const handleTaskChange = (e) => {
+        const name = e.target.getAttribute('name');
+        const innerText = e.target.innerText;
+        setData((prevData) => ({
+            ...prevData,
+            [name]: innerText
+          }));
+    }
+
+
     return (
-        <li className='taskListItem'>
+        <li className={`taskListItem ${checked ? 'taskListItem_completed' : ''}`}>
             <div className="taskListItem-data">
                 <input className='taskListItem-data__checkbox' name='checkbox' type="checkbox" checked={checked}/>
                 <label htmlFor="checkbox"  onClick={()=>{checkboxChange()}}></label>
                 <div className='text-content'>
-                    <div className='text-content__title'>
+                    <div className='text-content__title' name='title' contentEditable onBlur={handleTaskChange} suppressContentEditableWarning={true}>
                         {title}
                     </div>
-                    <div className='text-content__desc'>
+                    <div className='text-content__desc' name='desc' contentEditable onBlur={(e)=>{handleTaskChange(e)}} suppressContentEditableWarning={true}>
                         {desc}
                     </div>
                 </div>
