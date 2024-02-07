@@ -1,6 +1,7 @@
 .app{
     background-color: #202c39;
     height: 100vh;
+    overflow-y: scroll;
     display: grid;
     grid-template-rows: 25% auto;
     grid-template-columns: 20% auto;

@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 
 import './app.css';
 
-import ProjectsList from "../ProjectsList/ProjectsList";
+import ProjectsTab from "../ProjectsTab/ProjectsTab";
 import AddTask from "../add-task/add-task";
 import TaskList from "../task-list/task-list";
 import dataService from "../../services/dataService";
@@ -13,14 +13,29 @@ const App = () => {
 
     const{saveDataToLocalStorage, getDataFromLocalStorage} = dataService();
     
+    let [projects, setProjects] = useState([]);
     let [tasks, setTasks] = useState([]);
 
     useEffect(()=>{
         let data = getDataFromLocalStorage();
-        console.log(data);
+        // console.log(data);
         data ? setTasks(tasks = data.data) : setTasks(tasks = [])
+        setProjects(
+            projects= [
+            {id: 'project-dRAqM62tO1KzBb8A5UpH7', title: 'Project - 17:38, 7', dateTime: 123, tasks: Array(0)},
+            {id: 'project-8vOd3ZIgdy9CAD--fxVIE', title: 'Project - 17:38, 7', dateTime: 321, tasks: Array(0)}
+            ])
     },[])
 
+    const addProject = (project) => {
+        setProjects(...projects, project);
+        if (Array.isArray(projects)) {
+            setProjects(projects.concat(project));
+        } else {
+            setProjects([project]);
+        }
+        console.log(projects);
+    }
 
     const addTask = (title, desc, dateTime, completed) => {
         if(title){
@@ -34,9 +49,8 @@ const App = () => {
             setTasks(
                 tasks = [...tasks, newTask]
             )
-            console.log('Входит в компонент:');
-
-            console.log(tasks);
+            // console.log('Входит в компонент:');
+            // console.log(tasks);
             saveDataToLocalStorage(tasks);
         }
     }
@@ -61,13 +75,15 @@ const App = () => {
             ...changedTask,
             ...data
         };
-        console.log(data);
+        // console.log(data);
         // saveDataToLocalStorage(tasks);
     }
 
     return(
         <div className="app">
-            <ProjectsList/>
+            <ProjectsTab
+                onAddProject={addProject}
+                projectsArr={projects}/>
             <AddTask onAddTask={addTask}/>
             <TaskList 
             onDeleteTask={(id) => deleteTask(id)}

@@ -1,10 +1,12 @@
 import './task-list-item.css';
 import {useState, useEffect} from "react";
 import Pomodoro from "../pomodoro/Pomodoro";
+import formatDateTimeService from '../../services/formatDateTimeService';
 
 
 const TaskListItem = ({taskData, onDeleteTask, onCompleteTask, onEditTask}) => {
     const {title, desc, dateTime, completed} = taskData;
+    const {formatTime, formatDateTime} = formatDateTimeService();
     
     const [checked, setChecked] = useState(completed);
     const [totalSec, setTotalSec] = useState(0);
@@ -18,19 +20,19 @@ const TaskListItem = ({taskData, onDeleteTask, onCompleteTask, onEditTask}) => {
         onEditTask(data);
       }, [data]);
 
-    const formatDateTime = (dateTime) =>{
-        const formatNum = (num) => {
-            if(num<10){
-                return `0${num}`;
-            }else{
-                return num;
-            }
-        }
-        const dateObj = new Date(dateTime)
-        let time = formatNum(dateObj.getHours()) + ':'+ formatNum(dateObj.getMinutes());
-        let date = formatNum(dateObj.getDate()) + '.' + (formatNum(dateObj.getMonth()+1)) + '.' + dateObj.getUTCFullYear().toString();
-        return `${time} ${date}`;
-    }
+    // const formatDateTime = (dateTime) =>{
+    //     const formatNum = (num) => {
+    //         if(num<10){
+    //             return `0${num}`;
+    //         }else{
+    //             return num;
+    //         }
+    //     }
+    //     const dateObj = new Date(dateTime)
+    //     let time = formatNum(dateObj.getHours()) + ':'+ formatNum(dateObj.getMinutes());
+    //     let date = formatNum(dateObj.getDate()) + '.' + (formatNum(dateObj.getMonth()+1)) + '.' + dateObj.getUTCFullYear().toString();
+    //     return `${time} ${date}`;
+    // }
 
     const checkboxChange = () => {
         setChecked(!checked);
@@ -41,13 +43,13 @@ const TaskListItem = ({taskData, onDeleteTask, onCompleteTask, onEditTask}) => {
         setTotalSec(totalTime);
     }
 
-    const formatTime = (totalTime) => {
-        let hours = Math.floor(totalTime / 3600);
-        let minutes = Math.floor(totalTime / 60 ) - (hours * 60);
-        let seconds = totalTime % 60;
-        let formattedTime = hours.toString().padStart(2,'0') + ':' + minutes.toString().padStart(2,'0') + ':' + seconds.toString().padStart(2,'0');
-        return formattedTime;
-    }
+    // const formatTime = (totalTime) => {
+    //     let hours = Math.floor(totalTime / 3600);
+    //     let minutes = Math.floor(totalTime / 60 ) - (hours * 60);
+    //     let seconds = totalTime % 60;
+    //     let formattedTime = hours.toString().padStart(2,'0') + ':' + minutes.toString().padStart(2,'0') + ':' + seconds.toString().padStart(2,'0');
+    //     return formattedTime;
+    // }
 
     const handleTaskChange = (e) => {
         const name = e.target.getAttribute('name');
