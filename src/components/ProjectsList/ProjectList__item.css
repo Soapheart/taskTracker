@@ -1,0 +1,10 @@
+.ProjectList__item{
+    padding: 6px;
+    margin: 15px 0;
+    border-radius: 20px;
+    box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
+    background-color: #283845;
+}
+.ProjectList__item_selected{
+    outline: 2px solid green;
+}

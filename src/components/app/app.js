@@ -7,6 +7,7 @@ import ProjectsTab from "../ProjectsTab/ProjectsTab";
 import AddTask from "../add-task/add-task";
 import TaskList from "../task-list/task-list";
 import dataService from "../../services/dataService";
+import projectManager from "../../services/projectConstructorService";
 
 
 const App = () => {
@@ -15,16 +16,21 @@ const App = () => {
     
     let [projects, setProjects] = useState([]);
     let [tasks, setTasks] = useState([]);
+    let [selectedProject, setSelectedProject] = useState(null);
 
     useEffect(()=>{
         let data = getDataFromLocalStorage();
-        // console.log(data);
-        data ? setTasks(tasks = data.data) : setTasks(tasks = [])
-        setProjects(
-            projects= [
-            {id: 'project-dRAqM62tO1KzBb8A5UpH7', title: 'Project - 17:38, 7', dateTime: 123, tasks: Array(0)},
-            {id: 'project-8vOd3ZIgdy9CAD--fxVIE', title: 'Project - 17:38, 7', dateTime: 321, tasks: Array(0)}
+        // data ? setTasks(tasks = data.data) : setTasks(tasks = [])
+        data ? setProjects(projects = data.data) : setProjects(projects = [
+                {id: 'project-dRAqM62tO1KzBb8A5UpH7', title: 'Project - 17:38, 7', dateTime: 123, tasks: []},
+                {id: 'project-8vOd3ZIgdy9CAD--fxVIE', title: 'Project - 17:39, 8', dateTime: 321, tasks: []}
             ])
+        // setProjects(
+        //     projects = [
+        //     {id: 'project-dRAqM62tO1KzBb8A5UpH7', title: 'Project - 17:38, 7', dateTime: 123, tasks: []},
+        //     {id: 'project-8vOd3ZIgdy9CAD--fxVIE', title: 'Project - 17:38, 7', dateTime: 321, tasks: []}
+        //     ])
+        console.log(projects);
     },[])
 
     const addProject = (project) => {
@@ -34,10 +40,15 @@ const App = () => {
         } else {
             setProjects([project]);
         }
-        console.log(projects);
+        saveDataToLocalStorage(projects);
+        
+        return projects;
     }
 
+    //Переписать функцию, нужно отправлять указатель (id) на проект и добавлять задачу в тот проект, на котором стоит указатель
+    //Добавить конструктор задачи?
     const addTask = (title, desc, dateTime, completed) => {
+
         if(title){
             const newTask = {
                 id:`task-${nanoid()}`,
@@ -46,12 +57,14 @@ const App = () => {
                 dateTime,
                 completed,
             }
+            // console.log(projects);
+            // console.log(projects.find(item => item.id === selectedProject));
             setTasks(
-                tasks = [...tasks, newTask]
+                projects.find(proj => proj.id === selectedProject).tasks = [...projects.find(proj => proj.id === selectedProject).tasks, newTask]
             )
-            // console.log('Входит в компонент:');
-            // console.log(tasks);
-            saveDataToLocalStorage(tasks);
+            console.log('Входит в компонент:');
+            console.log(tasks);
+            // saveDataToLocalStorage(tasks);
         }
     }
     const deleteTask = (id) =>{
@@ -83,13 +96,18 @@ const App = () => {
         <div className="app">
             <ProjectsTab
                 onAddProject={addProject}
+                onSetSelectedProject = {(id) => setSelectedProject(selectedProject = id)}
                 projectsArr={projects}/>
-            <AddTask onAddTask={addTask}/>
+            <AddTask 
+                onAddTask={addTask}/>
             <TaskList 
-            onDeleteTask={(id) => deleteTask(id)}
-            onCompleteTask={(id) => completeTask(id)}
-            onEditTask={(id, data)=>changeTask(id, data)}
-            tasksArr={tasks}/>
+                onDeleteTask={(id) => deleteTask(id)}
+                onCompleteTask={(id) => completeTask(id)}
+                onEditTask={(id, data)=>changeTask(id, data)}
+                tasksArr={tasks}
+                projectsArr={projects}
+                selectedProject={selectedProject}
+                />
         </div>
     )
 }

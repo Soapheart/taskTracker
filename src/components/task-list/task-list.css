@@ -2,3 +2,10 @@
     grid-column: 2;
     padding: 0px 30px;
 }
+.taskList_empty{
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}

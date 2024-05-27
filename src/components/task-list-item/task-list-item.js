@@ -64,7 +64,7 @@ const TaskListItem = ({taskData, onDeleteTask, onCompleteTask, onEditTask}) => {
     return (
         <li className={`taskListItem ${checked ? 'taskListItem_completed' : ''}`}>
             <div className="taskListItem-data">
-                <input className='taskListItem-data__checkbox' name='checkbox' type="checkbox" checked={checked}/>
+                <input className='taskListItem-data__checkbox' name='checkbox' type="checkbox" checked={checked} readOnly/>
                 <label htmlFor="checkbox"  onClick={()=>{checkboxChange()}}></label>
                 <div className='text-content'>
                     <div className='text-content__title' name='title' contentEditable onBlur={handleTaskChange} suppressContentEditableWarning={true}>
