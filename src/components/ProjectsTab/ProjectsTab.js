@@ -4,33 +4,40 @@ import { nanoid } from "nanoid";
 import AddProject from '../add-project/add-project';
 import dataService from "../../services/dataService";
 import ProjectList from '../ProjectsList/ProjectsList';
+import Button from '../Button/Button';
+import { useState } from 'react';
 
 const ProjectTab = (props) => {
-
     const {clearLocalStorage, exportData} = dataService();
-    const {projectsArr, onSetSelectedProject} = props;
+    const {projectsArr, onSetSelectedProject, editProject, deleteProject} = props;
+    const [servicesVisible, setServicesVisible] = useState(false);
 
-    const addProject = (title, dateTime) => {
-        const project = {
-            id:`project-${nanoid()}`,
-            title: title,
-            dateTime: dateTime,
-            completeness: 0,
-            tasks: []
-        }
-        props.onAddProject(project);
+    const addProjectMod = () =>{
+        props.onAddProject();
     }
 
+    const toggleServicesVisibility = () =>{
+        setServicesVisible(!servicesVisible)
+    }
 
     return(
         <div className="projectsTab">
             <span className='projectsTab__title'>Project List</span>
-            {/* <button onClick={()=>addProject()}>Add Project</button> */}
-            <AddProject onAddProject={addProject}/>
-            <ProjectList projectsArr={projectsArr} onSetSelectedProject={onSetSelectedProject}/>
+            <Button action="addProject" variant="addProject" text="Add Project" onClick={addProjectMod}/>
+            <ProjectList 
+                projectsArr={projectsArr} 
+                onSetSelectedProject={onSetSelectedProject} 
+                editProject={editProject}
+                deleteProject={deleteProject}    
+            />
             <div className='services'>
-                <button onClick={()=>{clearLocalStorage()}}>Clear Local Storage</button>
-                <button onClick={()=>{exportData()}}>Export Data</button>
+                <Button action='toggleServices' variant='settings' text='' onClick={toggleServicesVisibility}/>
+                {servicesVisible &&(
+                    <div className='services-menu'>
+                        <Button action="clearLocalStorage" variant="clearLocalStorage" onClick={()=>{clearLocalStorage()}} text=''/>
+                        <Button action="exportData" variant="exportData" onClick={()=>{exportData()}} text=''/>
+                    </div>
+                )}
             </div>
         </div>
     )

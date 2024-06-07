@@ -1,0 +1,58 @@
+.btn{
+    cursor: pointer;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    transition: all 0.3s;
+}
+.btn-primary{
+    color: white;
+    background-color: blue;
+}
+.btn-deleteProject, .btn-deleteTask{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    height: 22px;
+    color: white;
+    background-color: rgba(134, 0, 0, 0.66);
+}
+.btn-deleteProject:hover, .btn-deleteTask:hover{
+    background-color: rgb(214, 4, 0);
+}
+.btn-deleteProject::after, .btn-deleteTask::after{
+    content: '✖';
+}
+.btn-createTask{
+    background-color: #f2d492;
+    font-weight: 600;
+    align-self: end;
+}
+.btn-addProject{
+    background-color: #f2d492;
+    font-weight: 600;
+}
+.btn-createTask:hover, .btn-addProject:hover{
+    background-color: #b8b08d;
+}
+.btn-clearLocalStorage,.btn-exportData, .btn-settings{
+    width: 32px;
+    height: 32px;
+    background-color: #385257;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.btn-clearLocalStorage::after{
+    content: '💀';
+}
+.btn-exportData::after{
+    content: '📋';
+}
+.btn-settings::after{
+    content:'⚙️';
+}

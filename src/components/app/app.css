@@ -1,8 +1,11 @@
 .app{
     background-color: #202c39;
     height: 100vh;
-    overflow-y: scroll;
+    overflow:auto;
     display: grid;
-    grid-template-rows: 25% auto;
-    grid-template-columns: 20% auto;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 100px auto;
+    grid-template-columns: minmax(180px, 20%) auto;
+
 }

@@ -1,8 +1,15 @@
 .taskList{
+    position: relative;
     grid-column: 2;
     padding: 0px 30px;
+    overflow-y: scroll;
+    overflow-x: clip;
+    scrollbar-width: thin;
+    scrollbar-color: #283845 #202c39;
+    height:-webkit-fill-available;
+    width:-webkit-fill-available;
 }
-.taskList_empty{
+.taskList_message{
     grid-column: 2;
     display: flex;
     justify-content: center;

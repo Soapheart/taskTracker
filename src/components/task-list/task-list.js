@@ -4,33 +4,35 @@ import './task-list.css';
 import { useEffect, useState } from 'react';
 
 const TaskList = (props) => {
-    const {tasksArr, selectedProject, onDeleteTask, onCompleteTask, onEditTask} = props;
+    const {projectsArr, selectedProject, onDeleteTask, onCompleteTask, onEditTask} = props;
 
     const [arrItems, setArrItems] = useState([]);
+    const [taskListMessage, setTaskListMessage] = useState('');
 
     useEffect(()=>{
+        if(projectsArr && selectedProject){
+            const selProj = projectsArr.find(item => item.id.includes(selectedProject));
+            setArrItems(selProj.tasks);
+            if (projectsArr.find(item => item.id.includes(selectedProject)).tasks.length === 0){
+                setTaskListMessage('No tasks found');
+                setArrItems(null);
+            }
+        }else if (selectedProject === null){
+            setTaskListMessage('Please select a project');
+            setArrItems(null);
+        }
+    },[selectedProject, projectsArr])
 
-        setArrItems(tasksArr);
-        // console.log(selectedProject);
-        // console.log(typeof(arrItems));
-        // console.log(arrItems);
-        console.log(selectedProject);
-
-
-    },[tasksArr, selectedProject])
-
-    // console.log('Входит в компонент:');
-    // console.log(tasksArr);
-    if(arrItems.length > 0){
+    if(arrItems){
         const elements = arrItems.map(element=>{
-            // console.log(element);
             return(
                 <TaskListItem 
                     key={element.id}
                     onDeleteTask={()=>onDeleteTask(element.id)}
                     onCompleteTask={()=>onCompleteTask(element.id)}
-                    onEditTask={(data)=>onEditTask(element.id, data)}
+                    onEditTask={(...args)=>onEditTask(...args)}
                     taskData={element}
+                    selectedProject={selectedProject}
                 />
             )
         })
@@ -41,7 +43,7 @@ const TaskList = (props) => {
         )
     }else{
         return(
-            <div className='taskList_empty'>Empty task list</div>
+            <div className='taskList_message'>{taskListMessage}</div>
         )
     }
 

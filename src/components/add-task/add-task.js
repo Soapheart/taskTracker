@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import './add-task.css';
+import Button from "../Button/Button";
 
 const AddTask = (props) => {
 
@@ -15,19 +16,15 @@ const AddTask = (props) => {
     },[])
 
 
-    const submitTask = (e) => {
+    const createTask = (e) => {
         e.preventDefault();
         props.onAddTask(title, desc, dateTime, completed);
-        // setDesc('');
-        // setTitle('');
     }
 
 
 
     return(
-        <div className="taskCreate-form">
-            <button onClick={submitTask}>Create task</button>
-        </div>
+        <Button action="createTask" variant="createTask" text='+ Create task'  onClick={createTask}/>
     )
 }
 export default AddTask;

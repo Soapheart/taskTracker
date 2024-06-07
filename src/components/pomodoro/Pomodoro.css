@@ -1,5 +1,5 @@
 .pomodoro{
-  border-radius: 90px;
+  border-radius: 10px;
   /* height: 400px;
   width: 400px; */
   /* margin: 0 auto; */
@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 30px;
+  padding: 6px 16px;
   color: #31302f;
   background-color: #f2d492;
 }
