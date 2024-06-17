@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
+import { useEffect, useRef, useState } from "react";
 
 import './app.css';
 
 import ProjectsTab from "../ProjectsTab/ProjectsTab";
-import AddTask from "../add-task/add-task";
 import TaskList from "../task-list/task-list";
 import projectManager from "../../services/projectConstructorService";
+import Button from "../Button/Button";
+
 
 const App = () => {
 
@@ -18,6 +18,8 @@ const App = () => {
     },[])
 
     const pmInstance = projectManager();
+
+    const newProjectRef = useRef();
 
     const updateStorage = () => {
         const data = pmInstance.getProjects();
@@ -63,9 +65,10 @@ const App = () => {
                 editProject={editProject}
                 deleteProject={deleteProject}
                 onSetSelectedProject = {(id) => setSelectedProject(selectedProject = id)}
-                projectsArr={projects}/>
-            <AddTask 
-                onAddTask={()=>{addTask(selectedProject)}} onClick={()=>{updateStorage()}}/>
+                projectsArr={projects}
+                newProjectRef={newProjectRef}    
+            />
+            <Button action="createTask" variant="createTask" text='+ Create task' onClick={()=>addTask(selectedProject)}/>
             <TaskList 
                 onDeleteTask={(taskId) => deleteTask(selectedProject, taskId)}
                 onEditTask={(...args)=> editTask(...args)}

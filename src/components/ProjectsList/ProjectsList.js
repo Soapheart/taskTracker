@@ -4,9 +4,9 @@ import formatDateTimeService from '../../services/formatDateTimeService';
 import './ProjectList__item.css';
 
 const ProjectList = (props) => {
-    const {projectsArr, onSetSelectedProject, editProject, deleteProject} = props;
+    const {projectsArr, onSetSelectedProject, editProject, deleteProject, newProjectRef} = props;
     const [selectedItem, setSelectedItem] = useState(null);
-    const {formatTime, formatDateTime} = formatDateTimeService();
+    const {formatDateTime} = formatDateTimeService();
 
     useEffect(()=>{
     },[projectsArr]);
@@ -47,6 +47,8 @@ const ProjectList = (props) => {
         const innerText = e.target.innerText;
         editProject(projectID, innerText);
     }
+
+    
 
     if(projectsArr){
         const projects = projectsArr.map(element=>{

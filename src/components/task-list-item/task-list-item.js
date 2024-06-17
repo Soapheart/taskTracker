@@ -1,6 +1,6 @@
 import './task-list-item.css';
 import {useState, useEffect} from "react";
-import Pomodoro from "../pomodoro/Pomodoro";
+import Timer from "../Timer/Timer";
 import formatDateTimeService from '../../services/formatDateTimeService';
 import Button from '../Button/Button';
 
@@ -27,7 +27,7 @@ const TaskListItem = ({taskData, onDeleteTask, onEditTask, selectedProject}) => 
 
     const handleTaskChange = (e) => {
         const name = e.target.getAttribute('name');
-        if(e.target.tagName == 'LABEL'){
+        if(e.target.tagName === 'LABEL'){
             taskData.completed = !taskData.completed;
             setData((prevData) => ({
                 ...prevData,
@@ -55,7 +55,7 @@ const TaskListItem = ({taskData, onDeleteTask, onEditTask, selectedProject}) => 
                         {description}
                     </div>
                 </div>
-                <Pomodoro onTimerRun={handleTimeChange}/>
+                <Timer onTimerRun={handleTimeChange}/>
                 <Button action="deleteTask" variant="deleteTask" onClick={onDeleteTask}/>
             </div>
             <div className='taskListItem-meta'>

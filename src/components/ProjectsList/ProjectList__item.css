@@ -5,6 +5,7 @@
     scrollbar-color: #283845 #202c39;
     align-self: start;
     height: -webkit-fill-available;
+    width: inherit;
 }
 
 .ProjectList__item{
