@@ -1,0 +1,46 @@
+.modal-wrapper{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    cursor: pointer;
+    .modal{
+        cursor: auto;
+        background-color: #283845;
+        padding: 15px 20px;
+        border-radius: 10px;
+        color: #fff;
+        z-index: 11;
+        .modal-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .modal-body{
+            .param{
+                display: grid;
+                gap: 1rem;
+                grid-template-columns: auto 50px 3px 50px;
+                align-items: center;
+                justify-items: end;
+                .param-name{
+                    justify-self: start;
+                }
+                input{
+                    max-width: 50px;
+                }
+            }
+        }
+    }
+    
+}

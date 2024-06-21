@@ -21,24 +21,27 @@ const projectManager = () =>{
             this.tasks = [];
         }
     }
-    class ProjectStorage{
-        constructor(data=[]){
-            this.projects = data;
+    class DataStorage{
+        constructor(data = {projects: [], appTheme: 'dark'}) {
+            this.projects = data.projects;
+            this.appTheme = data.appTheme;
         }
-        saveProject(project){
+        saveProject = (project) => {
             this.projects.push(project);
         }
-        getProjects(){
-            return this.projects;
+        saveTheme = (theme) => {
+            this.appTheme = theme;
         }
     }
-    
+
     let storage;
     const data = getDataFromLocalStorage();
     if(data != null){
-        storage = new ProjectStorage(data.data.projects);
+        storage = new DataStorage(data);
+        console.log('Получено из стореджа');
     }else{
-        storage = new ProjectStorage();
+        storage = new DataStorage();
+        console.log('Создан новый сторадж');
     }
 
     function createProject(title){
@@ -61,7 +64,7 @@ const projectManager = () =>{
             saveDataToLocalStorage(storage);
     }
 
-    function getProjects(){
+    function getData(){
         return storage;
     }
 
@@ -93,9 +96,14 @@ const projectManager = () =>{
             saveDataToLocalStorage(storage);
         }
     }
-    // function completeTask(selectedProject, taskId, data){
 
-    // }
-    return {createProject, editProject, deleteProject, getProjects, createTask, deleteTask, editTask}
+    function changeTheme(theme){
+        storage.saveTheme(theme)
+        saveDataToLocalStorage(storage);
+        console.log(storage);
+    }
+
+
+    return {createProject, editProject, deleteProject, getData, createTask, deleteTask, editTask, changeTheme}
 }
 export default projectManager;

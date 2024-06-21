@@ -1,16 +1,16 @@
 const dataService = () => {
     let localDataStorage;
     const saveDataToLocalStorage = (data) => {
+        console.log('Сохранение в локал сторедж:')
+        console.log(data)
         localStorage.setItem(localDataStorage, JSON.stringify(data));
     }
     const getDataFromLocalStorage = ()=> {
         let data = JSON.parse(localStorage.getItem(localDataStorage));
         if (!data){
-            return data
+            return null
         } else {
-            return{
-                data
-            }
+            return data
         }
     }
     const clearLocalStorage = () => {

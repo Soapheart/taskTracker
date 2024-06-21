@@ -9,6 +9,7 @@ export default function Timer( {onTimerRun} ) {
     const [displayMessage, setDisplayMessage] = useState(false);
     const [playState, setPlayState] = useState(false);
     const intervalRef = useRef(null);
+    const [totalSeconds, setTotalSeconds] = useState(0);
 
     const [pomodoroStages, setPomodoroStages] = useState({work: 4, pause: 4})
 
@@ -54,6 +55,8 @@ export default function Timer( {onTimerRun} ) {
                     }else{
                         setTime({ ...time, seconds: seconds + 1});
                     }
+                    setTotalSeconds(totalSeconds + 1);
+                    onTimerRun(totalSeconds);
                     // console.log(time);
                 }, 1000)
             }else if(timerMode === 'pomodoro'){
@@ -71,6 +74,8 @@ export default function Timer( {onTimerRun} ) {
                     }else{
                         setTime({...time, seconds: seconds - 1});
                     }
+                    setTotalSeconds(totalSeconds + 1);
+                    onTimerRun(totalSeconds);
                 }, 1000)
             }
         }
