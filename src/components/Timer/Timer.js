@@ -2,21 +2,19 @@ import { useEffect, useRef, useState } from 'react';
 import './Timer.css';
 
 
-export default function Timer( {onTimerRun} ) {
-    const [timerChecked, setTimerChecked] = useState(true);
-    const [timerMode, setTimerMode] = useState('pomodoro'); // timer / pomodoro
+export default function Timer(props) {
+    const {onTimerRun, pomodoroSettings} = props;
+    const [timerChecked, setTimerChecked] = useState(false);
+    const [timerMode, setTimerMode] = useState('timer'); // timer / pomodoro
     const [time, setTime] = useState({hours: 0, minutes: 0, seconds: 0});
     const [displayMessage, setDisplayMessage] = useState(false);
     const [playState, setPlayState] = useState(false);
     const intervalRef = useRef(null);
     const [totalSeconds, setTotalSeconds] = useState(0);
-
     const [pomodoroStages, setPomodoroStages] = useState({work: 4, pause: 4})
-
-    const [pomodoroStage, setPomodoroStage] = useState('work');
-    let pomodoroSettings = {work:{minutes:25, seconds:0}, pause:{minutes:5, seconds:0}, rest:{minutes:30, seconds:0}};
-
-
+    const [pomodoroStage, setPomodoroStage] = useState('rest'); // work / pause / rest
+    
+    // let pomodoroSettings = {work:{minutes:25, seconds:0}, pause:{minutes:5, seconds:0}, rest:{minutes:30, seconds:0}};
 
     const pomodoroManager = (pomodoroStage, pomodoroSettings, pomodoroStages) =>{
         // (work>pause)*4>rest 
@@ -39,7 +37,7 @@ export default function Timer( {onTimerRun} ) {
         }
     }
 
-    const renders = useRef(0);
+    // const renders = useRef(0);
 
 
     useEffect(()=>{
@@ -48,19 +46,18 @@ export default function Timer( {onTimerRun} ) {
                 intervalRef.current = setInterval(()=>{
                     const {hours, minutes, seconds} = time;
                     if(time.minutes === 60){
-                        setTime({hours: hours + 1, minutes: 0, seconds: 0 });
+                        setTime({hours: hours + 1, ...time});
                     }
                     else if (time.seconds === 60){
-                        setTime({...time, minutes: minutes + 1, seconds: 0 });
+                        setTime({...time, minutes: minutes + 1});
                     }else{
                         setTime({ ...time, seconds: seconds + 1});
                     }
                     setTotalSeconds(totalSeconds + 1);
                     onTimerRun(totalSeconds);
-                    // console.log(time);
                 }, 1000)
             }else if(timerMode === 'pomodoro'){
-                // pomodoroManager(pomodoroStage, pomodoroSettings);
+                // pomodoroManager(pomodoroStage, pomodoroSettings, pomodoroStages);
                 intervalRef.current = setInterval(()=>{
                     const {minutes, seconds} = time;
                     if (seconds === 0){
@@ -80,7 +77,7 @@ export default function Timer( {onTimerRun} ) {
             }
         }
         return ()=>clearInterval(intervalRef.current);
-    },[playState, pomodoroStage, pomodoroSettings])
+    },[playState, pomodoroStage, pomodoroSettings, totalSeconds])
 
 
     const startStopBtnHandler = () => {
@@ -93,9 +90,9 @@ export default function Timer( {onTimerRun} ) {
             setTime({hours: 0, minutes: 0, seconds: 0})
         }
         if(timerMode === 'pomodoro'){
-            setTime({})
             setPomodoroStages({work: 4, pause: 4});
             setPomodoroStage('work');
+            setTime(pomodoroSettings[pomodoroStage]);
         }
     }
     const switchTimerMode = () => {
@@ -105,7 +102,7 @@ export default function Timer( {onTimerRun} ) {
             setTime({hours: 0, minutes: 0, seconds: 0});
         }else{
             setTimerMode('pomodoro');
-            setTime({hours: 0, minutes: 0, seconds: 0});
+            setTime({...time, minutes: pomodoroSettings[pomodoroStage].minutes, seconds: pomodoroSettings[pomodoroStage].seconds});
         }
     }
 

@@ -16,6 +16,13 @@ const App = () => {
     const [appTheme, setAppTheme] = useState();
     const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
+    const [pomodoroSettings, setPomodoroSettings] = useState({
+        work:{minutes:25, seconds:0}, 
+        pause:{minutes:5, seconds:0}, 
+        rest:{minutes:30, seconds:0}
+    });
+
+
     const pmInstance = projectManager();
 
     useEffect(()=>{
@@ -64,6 +71,10 @@ const App = () => {
         setSettingsModalOpen(!settingsModalOpen);
     }
 
+    const changePomodoroSettings = (settings) => {
+        setPomodoroSettings(settings);
+    }
+
     return(
         <div className="app">
             <ProjectsTab
@@ -88,8 +99,14 @@ const App = () => {
                 onEditTask={(...args)=> editTask(...args)}
                 projectsArr={projects}
                 selectedProject={selectedProject}
+                pomodoroSettings={pomodoroSettings}
                 />
-            <Modal openedState={settingsModalOpen} openPomodoroSettings={openPomodoroSettings}/>
+            <Modal
+                openedState={settingsModalOpen}
+                openPomodoroSettings={openPomodoroSettings}
+                pomodoroSettings={pomodoroSettings}
+                changePomodoroSettings={changePomodoroSettings}
+                />
         </div>
     )
 }

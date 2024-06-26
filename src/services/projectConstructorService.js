@@ -38,10 +38,8 @@ const projectManager = () =>{
     const data = getDataFromLocalStorage();
     if(data != null){
         storage = new DataStorage(data);
-        console.log('Получено из стореджа');
     }else{
         storage = new DataStorage();
-        console.log('Создан новый сторадж');
     }
 
     function createProject(title){

@@ -33,11 +33,17 @@
                 grid-template-columns: auto 50px 3px 50px;
                 align-items: center;
                 justify-items: end;
+                margin-bottom: 6px;
                 .param-name{
                     justify-self: start;
                 }
                 input{
-                    max-width: 50px;
+                    padding: 6px;
+                    color: #fff;
+                    border-radius: 6px;
+                    background-color: #202c39;
+                    max-width: 32px;
+                    border: none;
                 }
             }
         }

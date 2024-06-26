@@ -4,7 +4,7 @@ import './task-list.css';
 import { useEffect, useState } from 'react';
 
 const TaskList = (props) => {
-    const {projectsArr, selectedProject, onDeleteTask, onCompleteTask, onEditTask} = props;
+    const {projectsArr, selectedProject, onDeleteTask, onCompleteTask, onEditTask, pomodoroSettings} = props;
 
     const [arrItems, setArrItems] = useState([]);
     const [taskListMessage, setTaskListMessage] = useState('');
@@ -33,6 +33,7 @@ const TaskList = (props) => {
                     onEditTask={(...args)=>onEditTask(...args)}
                     taskData={element}
                     selectedProject={selectedProject}
+                    pomodoroSettings={pomodoroSettings}
                 />
             )
         })

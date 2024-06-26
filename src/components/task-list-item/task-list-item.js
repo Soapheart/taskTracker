@@ -5,7 +5,8 @@ import formatDateTimeService from '../../services/formatDateTimeService';
 import Button from '../Button/Button';
 
 
-const TaskListItem = ({taskData, onDeleteTask, onEditTask, selectedProject}) => {
+const TaskListItem = (props) => {
+    const {taskData, onDeleteTask, onEditTask, selectedProject, pomodoroSettings} = props;
     const {id, title, description, dateTime, completed} = taskData;
     const {formatTime, formatDateTime} = formatDateTimeService();
     
@@ -55,8 +56,15 @@ const TaskListItem = ({taskData, onDeleteTask, onEditTask, selectedProject}) => 
                         {description}
                     </div>
                 </div>
-                <Timer onTimerRun={handleTimeChange}/>
-                <Button action="deleteTask" variant="deleteTask" onClick={onDeleteTask}/>
+                <Timer
+                    onTimerRun={handleTimeChange}
+                    pomodoroSettings={pomodoroSettings}
+                />
+                <Button 
+                    action="deleteTask"
+                    variant="deleteTask"
+                    onClick={onDeleteTask}
+                />
             </div>
             <div className='taskListItem-meta'>
                 <div className='taskListItem-meta__time'>
