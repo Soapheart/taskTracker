@@ -1,0 +1,75 @@
+.app{
+    position: relative;
+    background-color: #202c39;
+    height: 100vh;
+    overflow:auto;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 100px auto;
+    grid-template-columns: minmax(180px, 20%) auto;
+    .tasksTab-wrapper{
+        grid-row: 1/3;
+        grid-column: 2;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .tasksTab{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        grid-template-rows: 100px auto;
+        grid-template-columns: 1fr;
+        align-self: stretch;
+        width: 100%;
+        grid-row: 1/3;
+        height: inherit;
+
+    }
+}
+@media (max-width:576px) {
+    .app{
+        grid-template-rows: auto;
+        grid-template-columns: 1fr;
+        overflow: clip;
+        .tasksTab-wrapper{
+            opacity: 0;
+            display: none;
+            z-index: 3;
+            grid-column: 1;
+        }
+        .tasksTab-wrapper.show{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            content: '';
+            background-color: rgba(0 0 0 / 80%);
+            opacity: 1;
+            display: block;
+            cursor: pointer;
+        }
+        .tasksTab{
+            grid-template-rows: 60px auto;
+            background-color: #202c39;
+            position: absolute;
+            grid-column: 1;
+            grid-row: 4;
+            top: -100%;
+        }
+        .tasksTab.show{
+            cursor: auto;
+            top: 20%;
+            z-index: 4;
+            border-radius: 20px 20px 0 0;
+            height: -webkit-fill-available;
+        }
+        .tasksTab.show::backdrop{
+            background-color: rgba(0 0 0 / 80%);
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+}

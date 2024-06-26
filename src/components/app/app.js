@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import './app.css';
+import './app.scss';
 
 import ProjectsTab from "../ProjectsTab/ProjectsTab";
 import TaskList from "../task-list/task-list";
@@ -75,32 +75,57 @@ const App = () => {
         setPomodoroSettings(settings);
     }
 
+    const onSetSelectedProject = (id) => {
+        setSelectedProject(id);
+        const tasksTab = document.querySelector('.tasksTab');
+        const tasksTabWrapper = document.querySelector('.tasksTab-wrapper');
+        tasksTab.classList.add('show');
+        tasksTabWrapper.classList.add('show');
+    }
+
+    const onCloseTasksTab = (e) =>{
+        const tasksTab = document.querySelector('.tasksTab');
+        const tasksTabWrapper = document.querySelector('.tasksTab-wrapper');
+        const closeTab = () => {
+            setSelectedProject(null);
+            tasksTab.classList.remove('show');
+            tasksTabWrapper.classList.remove('show');
+        }
+        if (e.target === tasksTabWrapper){
+            closeTab();
+        }
+    }
+
     return(
         <div className="app">
             <ProjectsTab
                 onAddProject={addProject}
                 editProject={editProject}
                 deleteProject={deleteProject}
-                onSetSelectedProject = {(id) => setSelectedProject(id)}
+                onSetSelectedProject = {(id) => onSetSelectedProject(id)}
                 projectsArr={projects}
                 // newProjectRef={newProjectRef}
                 changeTheme={changeTheme}
                 appTheme={appTheme}
                 openPomodoroSettings={openPomodoroSettings}
             />
-            <Button 
-                action="createTask" 
-                variant="createTask" 
-                text='+ Create task' 
-                onClick={()=>addTask(selectedProject)}
-            />
-            <TaskList 
-                onDeleteTask={(taskId) => deleteTask(selectedProject, taskId)}
-                onEditTask={(...args)=> editTask(...args)}
-                projectsArr={projects}
-                selectedProject={selectedProject}
-                pomodoroSettings={pomodoroSettings}
-                />
+            <div className="tasksTab-wrapper" onClick={(e)=>{onCloseTasksTab(e)}}>
+                <div className="tasksTab">
+                    <Button 
+                        action="createTask" 
+                        variant="createTask" 
+                        text='+ Create task' 
+                        onClick={()=>addTask(selectedProject)}
+                    />
+                    <TaskList 
+                        onDeleteTask={(taskId) => deleteTask(selectedProject, taskId)}
+                        onEditTask={(...args)=> editTask(...args)}
+                        projectsArr={projects}
+                        selectedProject={selectedProject}
+                        pomodoroSettings={pomodoroSettings}
+                        />
+                </div>
+            </div>
             <Modal
                 openedState={settingsModalOpen}
                 openPomodoroSettings={openPomodoroSettings}
