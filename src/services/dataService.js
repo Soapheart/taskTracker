@@ -1,8 +1,6 @@
 const dataService = () => {
     let localDataStorage;
     const saveDataToLocalStorage = (data) => {
-        console.log('Сохранение в локал сторедж:')
-        console.log(data)
         localStorage.setItem(localDataStorage, JSON.stringify(data));
     }
     const getDataFromLocalStorage = ()=> {
@@ -35,7 +33,7 @@ const dataService = () => {
             tempLink.setAttribute('download', filename);
             tempLink.click();
           }
-        const csv = convertToCSV(data);
+        const csv = convertToCSV(data.projects);
         downloadCSV(csv, 'data.csv')
     }
     return{

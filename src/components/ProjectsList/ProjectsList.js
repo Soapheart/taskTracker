@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../Button/Button";
 import formatDateTimeService from '../../services/formatDateTimeService';
 import './ProjectList__item.css';
@@ -8,13 +8,17 @@ const ProjectList = (props) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const {formatDateTime} = formatDateTimeService();
 
+    const projectItemRef = useRef(null);
+
+
     useEffect(()=>{
     },[projectsArr]);
 
 
     const handleClick = (e, id) =>{
-        if(e.target.getAttribute('action') == 'deleteProject'){
+        if(e.target.getAttribute('action') === 'deleteProject'){
             onDeleteProject(id);
+        }else if(e.target.getAttribute('action') === 'change-content'){
         }else{
             setSelectedItem(id);
             onSetSelectedProject(id);
@@ -58,11 +62,12 @@ const ProjectList = (props) => {
             return(
                 <div 
                     key={element.id}
+                    ref={projectItemRef}
                     onClick={(e) => handleClick(e, element.id)} 
                     className={`ProjectList__item ${element.id === selectedItem ? 'ProjectList__item_selected' : ''}`}
                 >
                     <div className="ProjectList__item-contentWrapper">
-                        <div className="ProjectList__item-title" name='title' contentEditable onBlur={(e)=>handleProjectChange(e, element.id)} suppressContentEditableWarning={true}>
+                        <div className="ProjectList__item-title" name='title' action="change-content" contentEditable onBlur={(e)=>handleProjectChange(e, element.id)} suppressContentEditableWarning={true}>
                             {element.title}
                         </div>
                         <div className="ProjectList__item-meta">

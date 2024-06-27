@@ -9,6 +9,20 @@
     height:-webkit-fill-available;
     width:-webkit-fill-available;
 }
+/* .taskList::before, .taskList::after{
+    position: fixed;
+    content: '';
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(0,0,0,0) 0%, #202c39 100%);
+    z-index: 1;
+    margin-right: 12px;
+    margin-left: -12px;
+}
+.taskList::after{
+    bottom: 16px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #202c39 100%);
+} */
 .taskList_message{
     grid-column: 1;
     display: flex;

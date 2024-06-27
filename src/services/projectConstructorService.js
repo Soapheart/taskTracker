@@ -98,7 +98,6 @@ const projectManager = () =>{
     function changeTheme(theme){
         storage.saveTheme(theme)
         saveDataToLocalStorage(storage);
-        console.log(storage);
     }
 
 

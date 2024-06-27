@@ -119,7 +119,7 @@ export default function Timer(props) {
         </div>
         {/* <p>Time passed: {renders.current}</p> */}
         <div className='timer__controls'>
-            <button onClick={startStopBtnHandler}>{playState ? "⏸" : "⏵"}</button>
+            <button onClick={startStopBtnHandler}>{playState ? "⏸" : "▶"}</button>
             <button onClick={reloadBtnHandler}>↻</button>
             <input type="checkbox" className="timerSwitch" checked={timerChecked} onChange={switchTimerMode}></input>
         </div>

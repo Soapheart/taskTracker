@@ -77,10 +77,12 @@ const App = () => {
 
     const onSetSelectedProject = (id) => {
         setSelectedProject(id);
-        const tasksTab = document.querySelector('.tasksTab');
-        const tasksTabWrapper = document.querySelector('.tasksTab-wrapper');
-        tasksTab.classList.add('show');
-        tasksTabWrapper.classList.add('show');
+        if(id){
+            const tasksTab = document.querySelector('.tasksTab');
+            const tasksTabWrapper = document.querySelector('.tasksTab-wrapper');
+            tasksTab.classList.add('show');
+            tasksTabWrapper.classList.add('show');
+        }
     }
 
     const onCloseTasksTab = (e) =>{
