@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const ProjectTab = (props) => {
     const {clearLocalStorage, exportData} = dataService();
-    const {projectsArr, onSetSelectedProject, editProject, deleteProject, newProjectRef, changeTheme, appTheme, openPomodoroSettings} = props;
+    const {projectsArr, onSetSelectedProject, editProject, deleteProject, changeTheme, appTheme, openPomodoroSettings} = props;
     const [servicesVisible, setServicesVisible] = useState(false);
 
     const addProjectMod = () =>{
@@ -27,7 +27,6 @@ const ProjectTab = (props) => {
                 onSetSelectedProject={onSetSelectedProject} 
                 editProject={editProject}
                 deleteProject={deleteProject}
-                newProjectRef={newProjectRef}
             />
             <div className='services'>
                 <Button action='toggleServices' variant='settings' text='' onClick={toggleServicesVisibility}/>

@@ -11,6 +11,7 @@ const projectManager = () =>{
             this.description = description;
             this.dateTime = new Date();
             this.completed = completed;
+            this.timeWasted = 0;
         }
     }
     class Project{
@@ -91,6 +92,7 @@ const projectManager = () =>{
             changedTask.title = data.title;
             changedTask.description = data.description;
             changedTask.completed = data.completed;
+            changedTask.timeWasted = data.timeWasted;
             saveDataToLocalStorage(storage);
         }
     }

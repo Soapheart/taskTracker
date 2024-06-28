@@ -29,8 +29,6 @@ const App = () => {
         updateStorage();
     },[])
 
-    // const newProjectRef = useRef();
-
     const updateStorage = () => {
         const data = pmInstance.getData();
         setProjects(data.projects);
@@ -106,7 +104,6 @@ const App = () => {
                 deleteProject={deleteProject}
                 onSetSelectedProject = {(id) => onSetSelectedProject(id)}
                 projectsArr={projects}
-                // newProjectRef={newProjectRef}
                 changeTheme={changeTheme}
                 appTheme={appTheme}
                 openPomodoroSettings={openPomodoroSettings}

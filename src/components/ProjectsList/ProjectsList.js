@@ -4,7 +4,7 @@ import formatDateTimeService from '../../services/formatDateTimeService';
 import './ProjectList__item.css';
 
 const ProjectList = (props) => {
-    const {projectsArr, onSetSelectedProject, editProject, deleteProject, newProjectRef} = props;
+    const {projectsArr, onSetSelectedProject, editProject, deleteProject} = props;
     const [selectedItem, setSelectedItem] = useState(null);
     const {formatDateTime} = formatDateTimeService();
 

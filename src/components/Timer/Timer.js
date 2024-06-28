@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import './Timer.css';
+import { SassCalculation } from 'sass';
 
 
 export default function Timer(props) {
-    const {onTimerRun, pomodoroSettings} = props;
+    const {onTimerRun, pomodoroSettings, timeWasted, saveTimeCounter} = props;
     const [timerChecked, setTimerChecked] = useState(false);
     const [timerMode, setTimerMode] = useState('timer'); // timer / pomodoro
     const [time, setTime] = useState({hours: 0, minutes: 0, seconds: 0});
     const [displayMessage, setDisplayMessage] = useState(false);
     const [playState, setPlayState] = useState(false);
     const intervalRef = useRef(null);
-    const [totalSeconds, setTotalSeconds] = useState(0);
+    const [totalSeconds, setTotalSeconds] = useState(timeWasted);
     const [pomodoroStages, setPomodoroStages] = useState({work: 4, pause: 4})
     const [pomodoroStage, setPomodoroStage] = useState('rest'); // work / pause / rest
     
@@ -64,9 +65,7 @@ export default function Timer(props) {
                         if(minutes !== 0){
                             setTime({minutes: minutes - 1, seconds: 59});
                         }else{
-                            console.log('Change of stage');
                             pomodoroManager(pomodoroStage, pomodoroSettings, pomodoroStages);
-                            console.log('Current stage: ' + pomodoroStage);
                         }
                     }else{
                         setTime({...time, seconds: seconds - 1});
@@ -82,6 +81,7 @@ export default function Timer(props) {
 
     const startStopBtnHandler = () => {
         setPlayState(!playState);
+        saveTimeCounter(totalSeconds);
     }
 
     const reloadBtnHandler = () => {

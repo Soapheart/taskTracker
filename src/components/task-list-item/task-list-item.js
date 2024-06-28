@@ -7,16 +7,19 @@ import Button from '../Button/Button';
 
 const TaskListItem = (props) => {
     const {taskData, onDeleteTask, onEditTask, selectedProject, pomodoroSettings} = props;
-    const {id, title, description, dateTime, completed} = taskData;
+    const {id, title, description, dateTime, completed, timeWasted} = taskData;
     const {formatTime, formatDateTime} = formatDateTimeService();
     
-    const [totalSec, setTotalSec] = useState(0);
 
     const [data, setData] = useState({
         title: taskData.title,
         description: taskData.description,
-        completed: taskData.completed
+        completed: taskData.completed,
+        timeWasted: taskData.timeWasted
     });
+
+    const [totalSec, setTotalSec] = useState(timeWasted);
+
 
     useEffect(() => {
         onEditTask(selectedProject, id, data);
@@ -24,6 +27,12 @@ const TaskListItem = (props) => {
 
     const handleTimeChange = (totalTime) => {
         setTotalSec(totalTime);
+    }
+
+    const saveTimeCounter = (totalTime) => {
+        setData(
+            {...data, timeWasted: totalTime}
+        )
     }
 
     const handleTaskChange = (e) => {
@@ -59,6 +68,8 @@ const TaskListItem = (props) => {
                 <Timer
                     onTimerRun={handleTimeChange}
                     pomodoroSettings={pomodoroSettings}
+                    timeWasted={timeWasted}
+                    saveTimeCounter={saveTimeCounter}
                 />
                 <Button 
                     action="deleteTask"
