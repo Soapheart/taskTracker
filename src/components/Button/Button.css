@@ -6,7 +6,7 @@
     border: none;
     padding: 10px;
     transition: all 0.3s;
-    background-color: #385257;
+    background-color: var(--btn-services);
 }
 .btn-primary{
     color: white;
@@ -18,10 +18,10 @@
     align-items: center;
     width: 22px;
     height: 22px;
-    color: white;
+    color: #fff;
     font-size: 0.8rem;
     line-height: 1rem;
-    background-color: rgba(134, 0, 0, 0.66);
+    background-color: rgb(134, 0, 0);
 }
 .btn-deleteProject:hover, .btn-deleteTask:hover{
     background-color: rgb(214, 4, 0);
@@ -30,16 +30,16 @@
     content: '✖';
 }
 .btn-createTask{
-    background-color: #f2d492;
+    background-color: var(--btn);
     font-weight: 600;
     align-self: end;
 }
 .btn-addProject{
-    background-color: #f2d492;
+    background-color: var(--btn);
     font-weight: 600;
 }
 .btn-createTask:hover, .btn-addProject:hover{
-    background-color: #b8b08d;
+    background-color: var(--btn_hovered);
 }
 .btn-clearLocalStorage, .btn-exportData, .btn-timeSettings, .btn-toggleTheme-light, .btn-toggleTheme-dark, .btn-settings{
     width: 32px;
@@ -63,8 +63,8 @@
     content: '🕒';
 }
 .btn-toggleTheme-light::after{
-    content: '☀️';
+    content: '🌙';
 }
 .btn-toggleTheme-dark::after{
-    content: '🌙';
+    content: '☀️';
 }

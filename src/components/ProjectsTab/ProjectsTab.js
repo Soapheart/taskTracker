@@ -3,12 +3,14 @@ import './ProjectsTab.css';
 import dataService from "../../services/dataService";
 import ProjectList from '../ProjectsList/ProjectsList';
 import Button from '../Button/Button';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { ThemeContext } from '../../providers/ThemeProvider';
 
 const ProjectTab = (props) => {
     const {clearLocalStorage, exportData} = dataService();
-    const {projectsArr, onSetSelectedProject, editProject, deleteProject, changeTheme, appTheme, openPomodoroSettings} = props;
+    const {projectsArr, onSetSelectedProject, editProject, deleteProject, openPomodoroSettings} = props;
     const [servicesVisible, setServicesVisible] = useState(false);
+    const [appTheme, setAppTheme] = useContext(ThemeContext);
 
     const addProjectMod = () =>{
         props.onAddProject();
@@ -17,6 +19,11 @@ const ProjectTab = (props) => {
     const toggleServicesVisibility = () =>{
         setServicesVisible(!servicesVisible)
     }
+
+    const changeTheme = () =>{
+        setAppTheme(appTheme === 'light' ? 'dark' : 'light');
+    }
+
 
     return(
         <div className="projectsTab">

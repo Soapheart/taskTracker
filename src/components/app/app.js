@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import './app.scss';
 
@@ -7,13 +7,14 @@ import TaskList from "../task-list/task-list";
 import projectManager from "../../services/projectConstructorService";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
+import { ThemeProvider } from "../../providers/ThemeProvider";
 
 
 const App = () => {
 
     const [projects, setProjects] = useState([]);
     const [selectedProject, setSelectedProject] = useState(null);
-    const [appTheme, setAppTheme] = useState();
+    // const [appTheme, setAppTheme] = useState();
     const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
     const [pomodoroSettings, setPomodoroSettings] = useState({
@@ -32,7 +33,7 @@ const App = () => {
     const updateStorage = () => {
         const data = pmInstance.getData();
         setProjects(data.projects);
-        setAppTheme(data.appTheme === 'light' ? 'dark' : 'light');
+        // setAppTheme(data.appTheme === 'light' ? 'dark' : 'light');
     }
     
     const addProject = () => {
@@ -60,10 +61,10 @@ const App = () => {
         updateStorage();
     }
 
-    const changeTheme = () => {
-        setAppTheme(appTheme === 'light' ? 'dark' : 'light');
-        pmInstance.changeTheme(appTheme);
-    }
+    // const changeTheme = () => {
+    //     setAppTheme(appTheme === 'light' ? 'dark' : 'light');
+    //     pmInstance.changeTheme(appTheme);
+    // }
 
     const openPomodoroSettings = () => {
         setSettingsModalOpen(!settingsModalOpen);
@@ -97,41 +98,43 @@ const App = () => {
     }
 
     return(
-        <div className="app">
-            <ProjectsTab
-                onAddProject={addProject}
-                editProject={editProject}
-                deleteProject={deleteProject}
-                onSetSelectedProject = {(id) => onSetSelectedProject(id)}
-                projectsArr={projects}
-                changeTheme={changeTheme}
-                appTheme={appTheme}
-                openPomodoroSettings={openPomodoroSettings}
-            />
-            <div className="tasksTab-wrapper" onClick={(e)=>{onCloseTasksTab(e)}}>
-                <div className="tasksTab">
-                    <Button 
-                        action="createTask" 
-                        variant="createTask" 
-                        text='+ Create task' 
-                        onClick={()=>addTask(selectedProject)}
-                    />
-                    <TaskList 
-                        onDeleteTask={(taskId) => deleteTask(selectedProject, taskId)}
-                        onEditTask={(...args)=> editTask(...args)}
-                        projectsArr={projects}
-                        selectedProject={selectedProject}
-                        pomodoroSettings={pomodoroSettings}
-                        />
-                </div>
-            </div>
-            <Modal
-                openedState={settingsModalOpen}
-                openPomodoroSettings={openPomodoroSettings}
-                pomodoroSettings={pomodoroSettings}
-                changePomodoroSettings={changePomodoroSettings}
+        <ThemeProvider pmInstance={pmInstance}>
+            <div className="app">
+                <ProjectsTab
+                    onAddProject={addProject}
+                    editProject={editProject}
+                    deleteProject={deleteProject}
+                    onSetSelectedProject = {(id) => onSetSelectedProject(id)}
+                    projectsArr={projects}
+                    // changeTheme={changeTheme}
+                    // appTheme={appTheme}
+                    openPomodoroSettings={openPomodoroSettings}
                 />
-        </div>
+                <div className="tasksTab-wrapper" onClick={(e)=>{onCloseTasksTab(e)}}>
+                    <div className="tasksTab">
+                        <Button 
+                            action="createTask" 
+                            variant="createTask" 
+                            text='+ Create task' 
+                            onClick={()=>addTask(selectedProject)}
+                        />
+                        <TaskList 
+                            onDeleteTask={(taskId) => deleteTask(selectedProject, taskId)}
+                            onEditTask={(...args)=> editTask(...args)}
+                            projectsArr={projects}
+                            selectedProject={selectedProject}
+                            pomodoroSettings={pomodoroSettings}
+                            />
+                    </div>
+                </div>
+                <Modal
+                    openedState={settingsModalOpen}
+                    openPomodoroSettings={openPomodoroSettings}
+                    pomodoroSettings={pomodoroSettings}
+                    changePomodoroSettings={changePomodoroSettings}
+                    />
+            </div>
+        </ThemeProvider>
     )
 }
 

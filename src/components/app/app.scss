@@ -1,6 +1,8 @@
+@import '../../scss/colors.scss';
+
 .app{
     position: relative;
-    background-color: #202c39;
+    background-color: var(--bg);
     height: 100dvh;
     overflow:auto;
     display: grid;
@@ -53,7 +55,7 @@
         }
         .tasksTab{
             grid-template-rows: 60px auto;
-            background-color: #202c39;
+            background-color: var(--main);
             position: absolute;
             grid-column: 1;
             grid-row: 4;

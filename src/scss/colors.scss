@@ -1,5 +1,28 @@
-$bg: #202c39;
-$main: #283845;
-$btn: #f2d492;
-$btn_hovered: #b8b08d;
-$selected: #f29559;
+.app[data-theme='light']{
+    --bg: #f4f4f4;
+    --main: #e1e1e1;
+    --btn: #f2d492;
+    --btn_hovered: #b8b08d;
+    --selected: #f29559;
+    --text-color: #000;
+    --scrollbar: #f4f4f4 #e1e1e1;
+    --btn-services: #505050;
+}
+
+.app[data-theme='dark']{
+    --bg: #202c39;
+    --main: #283845;
+    --btn: #f2d492;
+    --btn_hovered: #b8b08d;
+    --selected: #f29559;
+    --text-color: #fff;
+    --red: red;
+    --scrollbar: #283845 #202c39;
+    --btn-services: #385257;
+}
+
+// $bg: #202c39;
+// $main: #283845;
+// $btn: #f2d492;
+// $btn_hovered: #b8b08d;
+// $selected: #f29559;

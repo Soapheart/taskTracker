@@ -2,12 +2,12 @@
     outline: 2px solid rgba(0, 0, 0, 0);
     transition: 0.2s all;
     position: relative;
-    color: #fff;
+    color: var(--text-color);
     list-style: none;
     margin-top: 6px;
     margin-bottom: 16px;
     padding: 16px;
-    background-color: #283845;
+    background-color: var(--main);
     border-radius: 20px;
     -webkit-box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.2);

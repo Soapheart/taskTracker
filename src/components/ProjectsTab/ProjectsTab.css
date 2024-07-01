@@ -1,6 +1,6 @@
 .projectsTab{
     position: relative;
-    color:#fff;
+    color: var(--text-color);
     grid-row: 1/3;
     /* padding: 32px 16px; */
     display: grid;
@@ -21,7 +21,7 @@
     align-self: center;
 }
 .services-menu{
-    background: #283845;
+    background: var(--main);
     border-radius: 20px;
     position: absolute;
     display: flex;
