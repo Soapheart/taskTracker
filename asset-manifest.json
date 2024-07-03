@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Soapheart/taskTracker/static/css/main.bb5b751c.css",
+    "main.js": "/Soapheart/taskTracker/static/js/main.4278ffe0.js",
+    "index.html": "/Soapheart/taskTracker/index.html",
+    "main.bb5b751c.css.map": "/Soapheart/taskTracker/static/css/main.bb5b751c.css.map",
+    "main.4278ffe0.js.map": "/Soapheart/taskTracker/static/js/main.4278ffe0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bb5b751c.css",
+    "static/js/main.4278ffe0.js"
+  ]
+}
