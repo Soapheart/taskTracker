@@ -14,7 +14,6 @@ const App = () => {
 
     const [projects, setProjects] = useState([]);
     const [selectedProject, setSelectedProject] = useState(null);
-    // const [appTheme, setAppTheme] = useState();
     const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
     const [pomodoroSettings, setPomodoroSettings] = useState({
@@ -33,7 +32,6 @@ const App = () => {
     const updateStorage = () => {
         const data = pmInstance.getData();
         setProjects(data.projects);
-        // setAppTheme(data.appTheme === 'light' ? 'dark' : 'light');
     }
     
     const addProject = () => {
@@ -60,11 +58,6 @@ const App = () => {
         pmInstance.editTask(selectedProject, taskId, data);
         updateStorage();
     }
-
-    // const changeTheme = () => {
-    //     setAppTheme(appTheme === 'light' ? 'dark' : 'light');
-    //     pmInstance.changeTheme(appTheme);
-    // }
 
     const openPomodoroSettings = () => {
         setSettingsModalOpen(!settingsModalOpen);
@@ -106,8 +99,6 @@ const App = () => {
                     deleteProject={deleteProject}
                     onSetSelectedProject = {(id) => onSetSelectedProject(id)}
                     projectsArr={projects}
-                    // changeTheme={changeTheme}
-                    // appTheme={appTheme}
                     openPomodoroSettings={openPomodoroSettings}
                 />
                 <div className="tasksTab-wrapper" onClick={(e)=>{onCloseTasksTab(e)}}>
