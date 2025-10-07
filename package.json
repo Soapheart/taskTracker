@@ -15,9 +15,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "bun run --bun react-scripts start",
-    "build": "bun run --bun react-scripts build",
-    "test": "bun run --bun react-scripts test",
+    "dev": "bunx --bun vite",
+    "build": "bunx --bun vite build", 
+    "preview": "bunx --bun vite preview",
+    "test": "bun test",
     "type-check": "tsc --noEmit"
   },
   "eslintConfig": {
@@ -49,7 +50,12 @@
     "@types/bun": "latest",
     "@types/node": "^24.7.0",
     "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0"
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "vite": "^7.1.9",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-svgr": "^4.5.0",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "peerDependencies": {
     "typescript": "^5.9.3"

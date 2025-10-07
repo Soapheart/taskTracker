@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import Button from '../Button/Button.js';
+import Button from '../Button/Button';
 import './Modal.scss';
 
 
@@ -33,7 +33,7 @@ const Modal = (props) => {
                 <div ref={modalRef} className='modal'>
                     <div className='modal-header'>
                         <span>Pomodoro settings</span>
-                        <Button action="closeModal" variant="deleteProject" onClick={()=>openPomodoroSettings()}/>
+                        <Button variant="deleteProject" onClick={()=>openPomodoroSettings()}/>
                     </div>
                     <div className='modal-body'>
                         Adjust time intervals for pomodoro:

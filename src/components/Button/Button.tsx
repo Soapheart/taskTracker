@@ -11,7 +11,7 @@ const Button = (props) =>{
       }, [variant]);    
 
     return(
-        <button action={action} className={`btn btn-${classes}`} onClick={onClick}>{text}</button>
+        <button className={`btn btn-${classes}`} onClick={onClick}>{text}</button>
     )
 }
 export default Button;
