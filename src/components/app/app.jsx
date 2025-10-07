@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 
 import './app.scss';
 
-import ProjectsTab from "../ProjectsTab/ProjectsTab";
-import TaskList from "../task-list/task-list";
-import projectManager from "../../services/projectConstructorService";
-import Button from "../Button/Button";
-import Modal from "../Modal/Modal";
-import { ThemeProvider } from "../../providers/ThemeProvider";
+import ProjectsTab from "../ProjectsTab/ProjectsTab.js";
+import TaskList from "../task-list/task-list.js";
+import projectManager from "../../services/projectConstructorService.js";
+import Button from "../Button/Button.js";
+import Modal from "../Modal/Modal.js";
+import { ThemeProvider } from "../../providers/ThemeProvider.jsx";
 
 
 const App = () => {
@@ -103,12 +103,14 @@ const App = () => {
                 />
                 <div className="tasksTab-wrapper" onClick={(e)=>{onCloseTasksTab(e)}}>
                     <div className="tasksTab">
+                        {selectedProject ? 
                         <Button 
                             action="createTask" 
                             variant="createTask" 
                             text='+ Create task' 
                             onClick={()=>addTask(selectedProject)}
                         />
+                        : null}
                         <TaskList 
                             onDeleteTask={(taskId) => deleteTask(selectedProject, taskId)}
                             onEditTask={(...args)=> editTask(...args)}

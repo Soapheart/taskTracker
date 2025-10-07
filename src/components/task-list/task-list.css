@@ -24,7 +24,7 @@
     background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #202c39 100%);
 } */
 .taskList_message{
-    grid-column: 1;
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;

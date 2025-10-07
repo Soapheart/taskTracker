@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import Button from "../Button/Button";
-import formatDateTimeService from '../../services/formatDateTimeService';
+import Button from "../Button/Button.js";
+import formatDateTimeService from '../../services/formatDateTimeService.js';
 import './ProjectList__item.css';
 
 const ProjectList = (props) => {

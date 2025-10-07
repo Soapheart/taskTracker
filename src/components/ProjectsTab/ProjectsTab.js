@@ -1,10 +1,10 @@
 import './ProjectsTab.css';
 
-import dataService from "../../services/dataService";
-import ProjectList from '../ProjectsList/ProjectsList';
-import Button from '../Button/Button';
+import dataService from "../../services/dataService.js";
+import ProjectList from '../ProjectsList/ProjectsList.js';
+import Button from '../Button/Button.js';
 import { useState, useContext } from 'react';
-import { ThemeContext } from '../../providers/ThemeProvider';
+import { ThemeContext } from '../../providers/ThemeProvider.jsx';
 
 const ProjectTab = (props) => {
     const {clearLocalStorage, exportData} = dataService();

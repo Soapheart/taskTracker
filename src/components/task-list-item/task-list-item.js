@@ -1,8 +1,8 @@
 import './task-list-item.css';
 import {useState, useEffect} from "react";
-import Timer from "../Timer/Timer";
-import formatDateTimeService from '../../services/formatDateTimeService';
-import Button from '../Button/Button';
+import Timer from "../Timer/Timer.js";
+import formatDateTimeService from '../../services/formatDateTimeService.js';
+import Button from '../Button/Button.js';
 
 
 const TaskListItem = (props) => {

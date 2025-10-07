@@ -1,4 +1,4 @@
-import TaskListItem from '../task-list-item/task-list-item';
+import TaskListItem from '../task-list-item/task-list-item.js';
 import './task-list.css';
 
 import { useEffect, useState } from 'react';

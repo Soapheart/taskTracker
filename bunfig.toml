@@ -1,0 +1,6 @@
+[install]
+global = true
+
+[bundle]
+entrypoints = ["./src/index.tsx"]
+outdir = "./build"

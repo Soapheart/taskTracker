@@ -15,10 +15,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "bun run --bun react-scripts start",
+    "build": "bun run --bun react-scripts build",
+    "test": "bun run --bun react-scripts test",
+    "type-check": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +42,16 @@
     "fs": false,
     "os": false,
     "path": false
+  },
+  "module": "src/index.js",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
   }
 }

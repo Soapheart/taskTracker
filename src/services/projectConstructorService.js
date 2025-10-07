@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import dataService from "./dataService";
+import dataService from "./dataService.js";
 
 const{saveDataToLocalStorage, getDataFromLocalStorage} = dataService();
 
